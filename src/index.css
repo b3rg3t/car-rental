@@ -1,11 +1,32 @@
 body {
   margin: 0;
-  padding: 8px 16px;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+section {
+  max-width: 720px;
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
 label {
@@ -19,8 +40,11 @@ label {
 form {
   display: flex;
   flex-direction: column;
-  align-items: start;
   gap: 16px;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: rgb(243, 243, 243);
 }
 
 p {

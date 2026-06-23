@@ -1,10 +1,24 @@
+.app-section {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 32px;
+}
+
+.app-header {
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+}
+
 .error-message {
   color: red;
   margin-top: 4px;
 }
 
 .primary-button {
-  background-color: #007bff;
+  background-color: #023a75;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -27,15 +41,17 @@
 }
 
 .rental-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
 .rental-item {
+  max-width: 720px;
   border: 1px solid lightgray;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 16px 16px;
 }
 
 .bold-text {
@@ -46,5 +62,5 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 8px;
+  gap: 16px;
 }

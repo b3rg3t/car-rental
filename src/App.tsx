@@ -5,8 +5,8 @@ import { ListOfActiveRentals } from "./features/list-of-rentals/ListOfActiveRent
 import { ListOfFinishedRentals } from "./features/list-of-rentals/ListOfFinishedRentals";
 
 export const App = () => (
-  <div>
-    <header className="App-header">
+  <div className="app-section">
+    <header className="app-header">
       <h1>{text.header}</h1>
     </header>
     <NewRegistration />
