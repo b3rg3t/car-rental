@@ -1,6 +1,6 @@
 const config = {
     printWidth: 120,
-    tabWidth: 20
+    tabWidth: 2
 }
 
 export default config;

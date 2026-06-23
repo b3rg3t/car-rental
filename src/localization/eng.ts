@@ -27,12 +27,19 @@ export const text = {
   listOfFinishedRentals: {
     header: "List of finished rentals",
     noFinishedRentals: "No finished rentals",
+    priceOfRental: "Price for the rental period",
+    currency: "$",
   },
   validation: {
     required: "This field is required",
     minLength: "Minimum length is {0}",
     maxLength: "Maximum length is {0}",
-    pattern: "Invalid format, expected format is {0}",
+    minValue: "Value must be greater than {0}",
+    endDate: "End date should be minimum {0}",
+    minTime: "End time must be greater than {0}",
+  },
+  utils: {
+    invalidDate: "Invalid date",
   },
   button: {
     submit: "Submit",

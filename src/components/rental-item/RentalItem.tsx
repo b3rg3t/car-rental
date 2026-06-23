@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { text } from "../../localization/eng";
-import { RentalInfromationResponse } from "../../models/types/rental-info/rentalInformationResponse";
 import { ReturnOfCar } from "../../features/return-of-car/ReturnOfCar";
+import { formatDate } from "../../features/utils/formatDate";
+import { RentalInformation } from "../../models/types/rental-info/rentalInformation";
 
 const {
   registrationNumber,
@@ -13,8 +14,10 @@ const {
 
 const { endDate, meterreadingEnd } = text.returnOfCar.form;
 
+const { priceOfRental, currency } = text.listOfFinishedRentals;
+
 interface RentalItemProps {
-  rental: Partial<RentalInfromationResponse>;
+  rental: Partial<RentalInformation>;
   isActive?: boolean;
 }
 
@@ -34,7 +37,7 @@ export const RentalItem: FC<RentalItemProps> = ({
       <li>
         <span className="bold-text">{socialSecurityNumber}: </span>
         {rental.socialSecurityNumber}
-      </li>{" "}
+      </li>
       <li>
         <hr />
       </li>
@@ -55,26 +58,38 @@ export const RentalItem: FC<RentalItemProps> = ({
       </li>
       <li className="items-between">
         <p>
-          <span className="bold-text">{startTime}: </span> {rental.startDate}
+          <span className="bold-text">{startTime}: </span>
+          {formatDate(rental.startDate)}
         </p>
         {rental.endDate && (
           <p>
-            <span className="bold-text">{endDate}: </span> {rental.endDate}
+            <span className="bold-text">{endDate}: </span>
+            {formatDate(rental.endDate)}
           </p>
         )}
       </li>
       {rental.price && (
         <>
           <hr />
-          <li>{rental.price}</li>
+          <li>
+            <span className="bold-text">{priceOfRental}: </span>
+            {rental.price} {currency}
+          </li>
         </>
       )}
     </ul>
-    {isActive && (
-      <>
-        <hr />
-        <ReturnOfCar rentalId={rental.rentalId!} />
-      </>
-    )}
+    {isActive &&
+      rental.rentalId &&
+      rental.startDate &&
+      rental.meterreadingStart && (
+        <>
+          <hr />
+          <ReturnOfCar
+            rentalId={rental.rentalId}
+            startDate={rental.startDate}
+            meterreadingStart={rental.meterreadingStart}
+          />
+        </>
+      )}
   </li>
 );

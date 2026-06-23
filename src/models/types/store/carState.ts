@@ -1,8 +1,5 @@
-import { RentalInformationReturn } from "../rental-info/rentalInformationReturn";
+import { RentalInformation } from "../rental-info/rentalInformation";
 import { RentalInformationStart } from "../rental-info/rentalInformationStart";
-
-export type RentalInformation = RentalInformationStart &
-  RentalInformationReturn;
 
 export type CarState = {
   activeRentals: RentalInformationStart[];

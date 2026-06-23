@@ -1,3 +1,4 @@
+import { calculatePrice } from "../features/utils/calculatePrice";
 import { CarActions } from "../models/enums/store/carActions";
 import { ActionType } from "../models/types/store/actionType";
 import { CarState } from "../models/types/store/carState";
@@ -15,13 +16,20 @@ export const carReducer = (state: CarState, action: ActionType): CarState => {
       );
 
       if (activeCar) {
+        const price = calculatePrice(
+          activeCar.startDate,
+          action.payload.endDate,
+          activeCar.carCategory,
+          activeCar.meterreadingStart,
+          action.payload.meterreadingEnd,
+        );
         return {
           ...state,
           activeRentals: state.activeRentals.filter(
             (rental) => rental.rentalId !== action.payload.rentalId,
           ),
           finishedRents: [
-            { ...activeCar, ...action.payload },
+            { ...activeCar, ...action.payload, price },
             ...state.finishedRents,
           ],
         };

@@ -1,4 +1,5 @@
 import { carReducer } from "./carReducer";
+import { calculatePrice } from "../features/utils/calculatePrice";
 import { CarActions } from "../models/enums/store/carActions";
 import { CarState } from "../models/types/store/carState";
 import { CarTypes } from "../models/enums/carTypes";
@@ -55,6 +56,13 @@ describe("carReducer", () => {
     expect(nextState.finishedRents[0]).toEqual({
       ...initialState.activeRentals[0],
       ...returnPayload,
+      price: calculatePrice(
+        initialState.activeRentals[0].startDate,
+        returnPayload.endDate,
+        initialState.activeRentals[0].carCategory,
+        initialState.activeRentals[0].meterreadingStart,
+        returnPayload.meterreadingEnd,
+      ),
     });
   });
 

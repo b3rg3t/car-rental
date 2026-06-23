@@ -9,9 +9,7 @@ describe("ListOfActiveRentals", () => {
     const mockDispatch = vi.fn();
     renderWithProviders(<ListOfActiveRentals />, {}, mockDispatch);
 
-    expect(
-      screen.getByText(text.listOfActiveRentals.noActiveRentals),
-    ).toBeInTheDocument();
+    expect(screen.getByText(text.listOfActiveRentals.noActiveRentals)).toBeInTheDocument();
   });
 
   test("should have 2 list items", () => {
@@ -35,14 +33,12 @@ describe("ListOfActiveRentals", () => {
       },
     ];
 
-    const { container } = renderWithProviders(
-      <ListOfActiveRentals />,
-      {},
-      mockDispatch,
-      { activeRentals, finishedRents: [] },
-    );
+    const { container } = renderWithProviders(<ListOfActiveRentals />, {}, mockDispatch, {
+      activeRentals,
+      finishedRents: [],
+    });
 
-    const listItems = container.querySelectorAll(".rental-list > .rental-item");
+    const listItems = container.querySelectorAll(".rental-item");
     expect(listItems).toHaveLength(2);
   });
 });

@@ -6,6 +6,8 @@ import { FC, useContext, useState } from "react";
 import { CarContext } from "../../store/carContext";
 import { RentalInformationBase } from "../../models/types/rental-info/rentalInformationBase";
 import { CarActions } from "../../models/enums/store/carActions";
+import { RentalInformationStart } from "../../models/types/rental-info/rentalInformationStart";
+import { formatString } from "../utils/formatString";
 
 const {
   header,
@@ -15,13 +17,23 @@ const {
 
 type RentalInformationForm = RentalInformationReturn & { endTime: string };
 
-export const ReturnOfCar: FC<RentalInformationBase> = ({ rentalId }) => {
+interface ReturnOfCarProps extends RentalInformationBase {
+  startDate: RentalInformationStart["startDate"];
+  meterreadingStart: RentalInformationStart["meterreadingStart"];
+}
+
+export const ReturnOfCar: FC<ReturnOfCarProps> = ({
+  startDate,
+  meterreadingStart,
+  rentalId,
+}) => {
   const { dispatch } = useContext(CarContext);
   const [displayForm, setDisplayForm] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<RentalInformationForm>();
 
@@ -41,6 +53,11 @@ export const ReturnOfCar: FC<RentalInformationBase> = ({ rentalId }) => {
     setDisplayForm(false);
   };
 
+  const minEndDate = startDate.split("T")[0];
+  const minEndTime = startDate.split("T")[1];
+  const endDateValue = watch("endDate");
+  const isSameDay = endDateValue === minEndDate;
+
   if (!displayForm) {
     return (
       <button onClick={() => setDisplayForm(true)} className="primary-button">
@@ -52,18 +69,38 @@ export const ReturnOfCar: FC<RentalInformationBase> = ({ rentalId }) => {
   return (
     <section>
       <h3 id="return-of-car">{header}</h3>
-      <form aria-labelledby="return-of-car" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        aria-labelledby="return-of-car"
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <InputWrapper label={endDate} fieldName="endDate" errors={errors}>
           <input
             id="endDate"
-            {...register("endDate", { required: text.validation.required })}
+            {...register("endDate", {
+              validate: {
+                minEndDate: (value) =>
+                  value >= minEndDate ||
+                  formatString(text.validation.endDate, minEndDate),
+              },
+              required: text.validation.required,
+            })}
             type="date"
+            min={minEndDate}
           />
         </InputWrapper>
         <InputWrapper label={endTime} fieldName="endTime" errors={errors}>
           <input
             id="endTime"
-            {...register("endTime", { required: text.validation.required })}
+            {...register("endTime", {
+              required: text.validation.required,
+              validate: {
+                minEndTime: (value) =>
+                  !isSameDay ||
+                  value > minEndTime ||
+                  formatString(text.validation.minTime, minEndTime),
+              },
+            })}
             type="time"
           />
         </InputWrapper>
@@ -76,7 +113,16 @@ export const ReturnOfCar: FC<RentalInformationBase> = ({ rentalId }) => {
             id="meterreadingEnd"
             {...register("meterreadingEnd", {
               required: text.validation.required,
+              validate: {
+                greaterThanStart: (value) =>
+                  Number(value) > meterreadingStart ||
+                  formatString(
+                    text.validation.minValue,
+                    meterreadingStart.toString(),
+                  ),
+              },
             })}
+            min={meterreadingStart + 1}
             type="number"
           />
         </InputWrapper>

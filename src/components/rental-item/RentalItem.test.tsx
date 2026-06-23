@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, test, vi } from "vitest";
 import { text } from "../../localization/eng";
+import { formatDate } from "../../features/utils/formatDate";
 
 vi.mock("../../features/return-of-car/ReturnOfCar", () => ({
   ReturnOfCar: () => <div data-testid="return-of-car" />,
@@ -56,7 +57,9 @@ describe("RentalItem", () => {
     expect(
       screen.getByText(baseRental.meterreadingStart.toString()),
     ).toBeInTheDocument();
-    expect(screen.getByText(baseRental.startDate)).toBeInTheDocument();
+    expect(
+      screen.getByText(formatDate(baseRental.startDate)),
+    ).toBeInTheDocument();
   });
 
   test("renders optional end date, meter reading end and price when provided", () => {
@@ -82,9 +85,13 @@ describe("RentalItem", () => {
     expect(
       screen.getByText(rentalWithExtras.meterreadingEnd.toString()),
     ).toBeInTheDocument();
-    expect(screen.getByText(rentalWithExtras.endDate)).toBeInTheDocument();
     expect(
-      screen.getByText(rentalWithExtras.price.toString()),
+      screen.getByText(formatDate(rentalWithExtras.endDate)),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText((content) =>
+        content.includes(rentalWithExtras.price.toString()),
+      ),
     ).toBeInTheDocument();
   });
 

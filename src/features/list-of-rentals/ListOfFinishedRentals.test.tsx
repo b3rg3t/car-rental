@@ -3,16 +3,14 @@ import { renderWithProviders } from "../../utils/test-utils";
 import { ListOfFinishedRentals } from "./ListOfFinishedRentals";
 import { text } from "../../localization/eng";
 import { CarTypes } from "../../models/enums/carTypes";
-import { RentalInformation } from "../../models/types/store/carState";
+import { RentalInformation } from "../../models/types/rental-info/rentalInformation";
 
 describe("ListOfFinishedRentals", () => {
   test("display empty list message", () => {
     const mockDispatch = vi.fn();
     renderWithProviders(<ListOfFinishedRentals />, {}, mockDispatch);
 
-    expect(
-      screen.getByText(text.listOfFinishedRentals.noFinishedRentals),
-    ).toBeInTheDocument();
+    expect(screen.getByText(text.listOfFinishedRentals.noFinishedRentals)).toBeInTheDocument();
   });
 
   test("should have 2 list items", () => {
@@ -36,14 +34,12 @@ describe("ListOfFinishedRentals", () => {
       },
     ] as unknown as RentalInformation[];
 
-    const { container } = renderWithProviders(
-      <ListOfFinishedRentals />,
-      {},
-      mockDispatch,
-      { activeRentals: [], finishedRents },
-    );
+    const { container } = renderWithProviders(<ListOfFinishedRentals />, {}, mockDispatch, {
+      activeRentals: [],
+      finishedRents,
+    });
 
-    const listItems = container.querySelectorAll(".rental-list > .rental-item");
+    const listItems = container.querySelectorAll(".rental-item");
     expect(listItems).toHaveLength(2);
   });
 });
