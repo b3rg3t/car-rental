@@ -1,0 +1,4 @@
+export enum CarActions {
+    REGISTER_RENTAL = "REGISTER_RENTAL",
+    UPDATE_RENTAL = "UPDATE_RENTAL",
+}
