@@ -15,7 +15,7 @@ export function InputWrapper({
 }: InputWrapperProps) {
   return (
     <div>
-      <label>
+      <label htmlFor={fieldName}>
         {label}
         {children}
       </label>

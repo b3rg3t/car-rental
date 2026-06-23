@@ -9,7 +9,7 @@ import { CarActions } from "../../models/enums/store/carActions";
 
 const {
   header,
-  form: { endDate, meterreadingEnd },
+  form: { endDate, endTime, meterreadingEnd },
   formButton,
 } = text.returnOfCar;
 
@@ -55,12 +55,14 @@ export const ReturnOfCar: FC<RentalInformationBase> = ({ rentalId }) => {
       <form aria-labelledby="return-of-car" onSubmit={handleSubmit(onSubmit)}>
         <InputWrapper label={endDate} fieldName="endDate" errors={errors}>
           <input
+            id="endDate"
             {...register("endDate", { required: text.validation.required })}
             type="date"
           />
         </InputWrapper>
-        <InputWrapper label={endDate} fieldName="endTime" errors={errors}>
+        <InputWrapper label={endTime} fieldName="endTime" errors={errors}>
           <input
+            id="endTime"
             {...register("endTime", { required: text.validation.required })}
             type="time"
           />
@@ -71,6 +73,7 @@ export const ReturnOfCar: FC<RentalInformationBase> = ({ rentalId }) => {
           errors={errors}
         >
           <input
+            id="meterreadingEnd"
             {...register("meterreadingEnd", {
               required: text.validation.required,
             })}

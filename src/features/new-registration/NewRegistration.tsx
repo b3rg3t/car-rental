@@ -82,6 +82,7 @@ export const NewRegistration = () => {
           errors={errors}
         >
           <input
+            id="registrationNumber"
             placeholder={"ABC-123"}
             {...register("registrationNumber", {
               required: text.validation.required,
@@ -102,6 +103,7 @@ export const NewRegistration = () => {
           errors={errors}
         >
           <input
+            id="socialSecurityNumber"
             {...register("socialSecurityNumber", {
               required: text.validation.required,
               minLength: {
@@ -122,6 +124,7 @@ export const NewRegistration = () => {
           errors={errors}
         >
           <select
+            id="carCategory"
             {...register("carCategory", {
               required: text.validation.required,
             })}
@@ -139,6 +142,7 @@ export const NewRegistration = () => {
         </InputWrapper>
         <InputWrapper label={startDate} fieldName="startDate" errors={errors}>
           <input
+            id="startDate"
             {...register("startDate", { required: text.validation.required })}
             type="date"
             placeholder={startDate}
@@ -146,6 +150,7 @@ export const NewRegistration = () => {
         </InputWrapper>
         <InputWrapper label={startTime} fieldName="startTime" errors={errors}>
           <input
+            id="startTime"
             {...register("startTime", { required: text.validation.required })}
             type="time"
             placeholder={startTime}
@@ -157,6 +162,7 @@ export const NewRegistration = () => {
           errors={errors}
         >
           <input
+            id="meterreadingStart"
             {...register("meterreadingStart", {
               required: text.validation.required,
             })}

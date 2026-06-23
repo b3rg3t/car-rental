@@ -13,7 +13,11 @@ export const text = {
   },
   returnOfCar: {
     header: "Return of car",
-    form: { endDate: "End date", meterreadingEnd: "Meter reading end (km)" },
+    form: {
+      endDate: "End date",
+      endTime: "End time",
+      meterreadingEnd: "Meter reading end (km)",
+    },
     formButton: "Register return of car",
   },
   listOfActiveRentals: {
