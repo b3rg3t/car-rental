@@ -7,7 +7,7 @@ import { RentalInformation } from "../../models/types/rental-info/rentalInformat
 const { registrationNumber, socialSecurityNumber, carCategory, startTime, meterreadingStart } =
   text.newRegistration.form;
 
-const { endDate, meterreadingEnd } = text.returnOfCar.form;
+const { endTime, meterreadingEnd } = text.returnOfCar.form;
 
 const { priceOfRental, currency, bookingNumber } = text.listOfFinishedRentals;
 
@@ -67,7 +67,7 @@ export const RentalItem: FC<RentalItemProps> = ({ rental, isActive = false }) =>
           {rental.endDate && (
             <div className="items-start">
               <p>
-                <span className="bold-text">{endDate}: </span>
+                <span className="bold-text">{endTime}: </span>
                 {formatDate(rental.endDate)}
               </p>
             </div>

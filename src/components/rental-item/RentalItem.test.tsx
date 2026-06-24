@@ -57,7 +57,7 @@ describe("RentalItem", () => {
     render(<RentalItem rental={rentalWithExtras} />);
 
     expect(screen.getByText((content) => content.includes(text.returnOfCar.form.meterreadingEnd))).toBeInTheDocument();
-    expect(screen.getByText((content) => content.includes(text.returnOfCar.form.endDate))).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes(text.returnOfCar.form.endTime))).toBeInTheDocument();
     expect(screen.getByText(rentalWithExtras.meterreadingEnd.toString())).toBeInTheDocument();
     expect(screen.getByText(formatDate(rentalWithExtras.endDate))).toBeInTheDocument();
     expect(screen.getByText((content) => content.includes(rentalWithExtras.price.toString()))).toBeInTheDocument();
