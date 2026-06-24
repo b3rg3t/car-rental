@@ -24,42 +24,26 @@ describe("RentalItem", () => {
     render(<RentalItem rental={baseRental} />);
 
     expect(
-      screen.getByText((content) =>
-        content.includes(text.newRegistration.form.carCategory),
-      ),
+      screen.getByText((content) => content.includes(text.listOfFinishedRentals.bookingNumber)),
+    ).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes(text.newRegistration.form.carCategory))).toBeInTheDocument();
+    expect(
+      screen.getByText((content) => content.includes(text.newRegistration.form.registrationNumber)),
     ).toBeInTheDocument();
     expect(
-      screen.getByText((content) =>
-        content.includes(text.newRegistration.form.registrationNumber),
-      ),
+      screen.getByText((content) => content.includes(text.newRegistration.form.socialSecurityNumber)),
     ).toBeInTheDocument();
     expect(
-      screen.getByText((content) =>
-        content.includes(text.newRegistration.form.socialSecurityNumber),
-      ),
+      screen.getByText((content) => content.includes(text.newRegistration.form.meterreadingStart)),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText((content) =>
-        content.includes(text.newRegistration.form.meterreadingStart),
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText((content) =>
-        content.includes(text.newRegistration.form.startTime),
-      ),
-    ).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes(text.newRegistration.form.startTime))).toBeInTheDocument();
 
+    expect(screen.getByText(baseRental.rentalId)).toBeInTheDocument();
     expect(screen.getByText(baseRental.carCategory)).toBeInTheDocument();
     expect(screen.getByText(baseRental.registrationNumber)).toBeInTheDocument();
-    expect(
-      screen.getByText(baseRental.socialSecurityNumber),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(baseRental.meterreadingStart.toString()),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(formatDate(baseRental.startDate)),
-    ).toBeInTheDocument();
+    expect(screen.getByText(baseRental.socialSecurityNumber)).toBeInTheDocument();
+    expect(screen.getByText(baseRental.meterreadingStart.toString())).toBeInTheDocument();
+    expect(screen.getByText(formatDate(baseRental.startDate))).toBeInTheDocument();
   });
 
   test("renders optional end date, meter reading end and price when provided", () => {
@@ -72,27 +56,11 @@ describe("RentalItem", () => {
 
     render(<RentalItem rental={rentalWithExtras} />);
 
-    expect(
-      screen.getByText((content) =>
-        content.includes(text.returnOfCar.form.meterreadingEnd),
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText((content) =>
-        content.includes(text.returnOfCar.form.endDate),
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(rentalWithExtras.meterreadingEnd.toString()),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(formatDate(rentalWithExtras.endDate)),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText((content) =>
-        content.includes(rentalWithExtras.price.toString()),
-      ),
-    ).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes(text.returnOfCar.form.meterreadingEnd))).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes(text.returnOfCar.form.endDate))).toBeInTheDocument();
+    expect(screen.getByText(rentalWithExtras.meterreadingEnd.toString())).toBeInTheDocument();
+    expect(screen.getByText(formatDate(rentalWithExtras.endDate))).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes(rentalWithExtras.price.toString()))).toBeInTheDocument();
   });
 
   test("renders ReturnOfCar when rental is active", () => {

@@ -22,11 +22,7 @@ interface ReturnOfCarProps extends RentalInformationBase {
   meterreadingStart: RentalInformationStart["meterreadingStart"];
 }
 
-export const ReturnOfCar: FC<ReturnOfCarProps> = ({
-  startDate,
-  meterreadingStart,
-  rentalId,
-}) => {
+export const ReturnOfCar: FC<ReturnOfCarProps> = ({ startDate, meterreadingStart, rentalId }) => {
   const { dispatch } = useContext(CarContext);
   const [displayForm, setDisplayForm] = useState(false);
   const {
@@ -60,7 +56,7 @@ export const ReturnOfCar: FC<ReturnOfCarProps> = ({
 
   if (!displayForm) {
     return (
-      <button onClick={() => setDisplayForm(true)} className="primary-button">
+      <button type="button" onClick={() => setDisplayForm(true)} className="primary-button return-of-car-button">
         {formButton}
       </button>
     );
@@ -68,20 +64,14 @@ export const ReturnOfCar: FC<ReturnOfCarProps> = ({
 
   return (
     <section>
-      <h3 id="return-of-car">{header}</h3>
-      <form
-        aria-labelledby="return-of-car"
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form aria-labelledby="return-of-car" noValidate onSubmit={handleSubmit(onSubmit)}>
+        <h3 id="return-of-car">{header}</h3>
         <InputWrapper label={endDate} fieldName="endDate" errors={errors}>
           <input
             id="endDate"
             {...register("endDate", {
               validate: {
-                minEndDate: (value) =>
-                  value >= minEndDate ||
-                  formatString(text.validation.endDate, minEndDate),
+                minEndDate: (value) => value >= minEndDate || formatString(text.validation.endDate, minEndDate),
               },
               required: text.validation.required,
             })}
@@ -96,19 +86,13 @@ export const ReturnOfCar: FC<ReturnOfCarProps> = ({
               required: text.validation.required,
               validate: {
                 minEndTime: (value) =>
-                  !isSameDay ||
-                  value > minEndTime ||
-                  formatString(text.validation.minTime, minEndTime),
+                  !isSameDay || value > minEndTime || formatString(text.validation.minTime, minEndTime),
               },
             })}
             type="time"
           />
         </InputWrapper>
-        <InputWrapper
-          label={meterreadingEnd}
-          fieldName="meterreadingEnd"
-          errors={errors}
-        >
+        <InputWrapper label={meterreadingEnd} fieldName="meterreadingEnd" errors={errors}>
           <input
             id="meterreadingEnd"
             {...register("meterreadingEnd", {
@@ -116,10 +100,7 @@ export const ReturnOfCar: FC<ReturnOfCarProps> = ({
               validate: {
                 greaterThanStart: (value) =>
                   Number(value) > meterreadingStart ||
-                  formatString(
-                    text.validation.minValue,
-                    meterreadingStart.toString(),
-                  ),
+                  formatString(text.validation.minValue, meterreadingStart.toString()),
               },
             })}
             min={meterreadingStart + 1}
@@ -127,11 +108,7 @@ export const ReturnOfCar: FC<ReturnOfCarProps> = ({
           />
         </InputWrapper>
         <div className="button-group">
-          <button
-            type="reset"
-            onClick={() => handleCancelClick()}
-            className="secondary-button"
-          >
+          <button type="reset" onClick={() => handleCancelClick()} className="secondary-button">
             {text.button.cancel}
           </button>
           <button type="submit" className="primary-button">

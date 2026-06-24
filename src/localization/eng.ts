@@ -28,6 +28,7 @@ export const text = {
     header: "List of finished rentals",
     noFinishedRentals: "No finished rentals",
     priceOfRental: "Price for the rental period",
+    bookingNumber: "Booking number",
     currency: "$",
   },
   validation: {

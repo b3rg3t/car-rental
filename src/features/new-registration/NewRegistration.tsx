@@ -10,14 +10,7 @@ import { CarActions } from "../../models/enums/store/carActions";
 
 const {
   header,
-  form: {
-    registrationNumber,
-    socialSecurityNumber,
-    carCategory,
-    startDate,
-    startTime,
-    meterreadingStart,
-  },
+  form: { registrationNumber, socialSecurityNumber, carCategory, startDate, startTime, meterreadingStart },
 } = text.newRegistration;
 
 type RentalInformationForm = RentalInformationStart & { startTime: string };
@@ -50,7 +43,7 @@ export const NewRegistration = () => {
       payload: {
         ...rest,
         startDate: dateAndTime,
-        rentalId: crypto.randomUUID(),
+        rentalId: crypto.randomUUID(), // Should be revieved from backend
       },
     });
     handleCancelClick();
@@ -63,7 +56,7 @@ export const NewRegistration = () => {
 
   if (!displayForm) {
     return (
-      <button onClick={() => setDisplayForm(true)} className="primary-button">
+      <button type="button" onClick={() => setDisplayForm(true)} className="primary-button">
         {header}
       </button>
     );
@@ -72,15 +65,8 @@ export const NewRegistration = () => {
   return (
     <section>
       <h2 id="new-registration">{header}</h2>
-      <form
-        aria-labelledby="new-registration"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <InputWrapper
-          label={registrationNumber}
-          fieldName="registrationNumber"
-          errors={errors}
-        >
+      <form aria-labelledby="new-registration" onSubmit={handleSubmit(onSubmit)}>
+        <InputWrapper label={registrationNumber} fieldName="registrationNumber" errors={errors}>
           <input
             id="registrationNumber"
             placeholder={"ABC-123"}
@@ -97,11 +83,7 @@ export const NewRegistration = () => {
             })}
           />
         </InputWrapper>
-        <InputWrapper
-          label={socialSecurityNumber}
-          fieldName="socialSecurityNumber"
-          errors={errors}
-        >
+        <InputWrapper label={socialSecurityNumber} fieldName="socialSecurityNumber" errors={errors}>
           <input
             id="socialSecurityNumber"
             {...register("socialSecurityNumber", {
@@ -118,11 +100,7 @@ export const NewRegistration = () => {
             placeholder={"YYMMDDXXXX"}
           />
         </InputWrapper>
-        <InputWrapper
-          label={carCategory}
-          fieldName="carCategory"
-          errors={errors}
-        >
+        <InputWrapper label={carCategory} fieldName="carCategory" errors={errors}>
           <select
             id="carCategory"
             {...register("carCategory", {
@@ -156,11 +134,7 @@ export const NewRegistration = () => {
             placeholder={startTime}
           />
         </InputWrapper>
-        <InputWrapper
-          label={meterreadingStart}
-          fieldName="meterreadingStart"
-          errors={errors}
-        >
+        <InputWrapper label={meterreadingStart} fieldName="meterreadingStart" errors={errors}>
           <input
             id="meterreadingStart"
             {...register("meterreadingStart", {
@@ -171,11 +145,7 @@ export const NewRegistration = () => {
           />
         </InputWrapper>
         <div className="button-group">
-          <button
-            type="reset"
-            onClick={() => handleCancelClick()}
-            className="secondary-button"
-          >
+          <button type="reset" onClick={() => handleCancelClick()} className="secondary-button">
             {text.button.cancel}
           </button>
           <button type="submit" className="primary-button">

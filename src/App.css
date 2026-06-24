@@ -38,6 +38,11 @@
 .button-group {
   display: flex;
   gap: 8px;
+  margin-top: 32px;
+}
+
+.return-of-car-button {
+  margin-top: 32px;
 }
 
 .rental-list {
@@ -62,5 +67,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 16px;
+}
+
+.items-start {
+  display: flex;
+  flex-grow: 1;
+  align-items: start;
   gap: 16px;
 }
